@@ -1,0 +1,9 @@
+What is XML?
+------------
+- XML stands for eXtensible Markup Language
+- XML was designed to store and transport data
+- XML documents form a tree structure that starts at "the root" and branches to "the leaves".
+What is XPath?
+--------------
+- XPath is a major element in the XSLT standard.
+- XPath can be used to navigate through elements and attributes in an XML document.
