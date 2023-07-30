@@ -8,8 +8,10 @@ What is XPath?
 - XPath is a major element in the XSLT standard.
 - XPath can be used to navigate through elements and attributes in an XML document.
 
-I'm trying to making a weather app that displays the weather and the temperature of many days of the week. I'm currently using openweathermap api for such task, the thing is that the information that I want (that is the date of the weather) only comes in xml format. Since I'm rebuilding it in ES6(ES2015) for academic reasons I wanted to also use the fetch api but since the fetch method parses it, it just delivers an error. so how can i fetch it or mby there is a better way to do it.
-
+<!--
+I'm trying to make a weather app that displays the weather and the temperature of many days of the week. I'm currently using OpenWeatherMap API for such tasks, the thing is that the information that I want (the date of the weather) only comes in xml format. 
+Since I'm rebuilding it in ES6(ES2015) for academic reasons I wanted also to use the fetch API but since the fetch method parses it, it just delivers an error. so how can I fetch it or by there is a better way to do it?
+-->
 let apis = {
     currentWeather: { //get user selected recomendation weather
         api:"http://api.openweathermap.org/data/2.5/forecast/daily?lat=",
@@ -33,3 +35,14 @@ function getCurrentCity(location) {
 }
 getCurrentLoc()
 .then( coords => getCurrentCity(coords))
+<!--
+Using native DOMParser getCurrentCity(location) can be written:
+-->
+function getCurrentCity(location) {
+    const lat = location.coords.latitude;
+    const lon = location.coords.longitude;
+    return fetch(apis.currentWeather.url(lat, lon))
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => console.log(data));
+}
