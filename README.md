@@ -1,2 +1,2 @@
-XMLXML-How-to-fetch-XML-with-fetch-api
+XML-How-to-fetch-XML-with-fetch-api
 
