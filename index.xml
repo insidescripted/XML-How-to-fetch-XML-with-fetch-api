@@ -46,3 +46,16 @@ function getCurrentCity(location) {
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => console.log(data));
 }
+<!--
+I guess the error is coming from this function: response => response.json() since the response is not a valid JSON object (it's XML).
+As far as I know, there is no native XML parser for fetch, but you can handle the response as text and use a third-party tool to do the actual parsing, for example jQuery has a $.parseXML() function.
+It will look something like this:
+-->
+function getCurrentCity(location) {
+    const lat = location.coords.latitude;
+    const lon = location.coords.longitude;
+    return fetch(apis.currentWeather.url(lat, lon))
+        .then(response => response.text())
+        .then(xmlString => $.parseXML(xmlString))
+        .then(data => console.log(data))
+}
